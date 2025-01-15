@@ -1,17 +1,21 @@
 CC := gcc
-CFLAGS := -nostdlib -ffreestanding -no-pie -Wall -Wextra -Werror -std=c11 -I./include
+CFLAGS := -O2 -nostdlib -ffreestanding -no-pie -Wall -Wextra -Werror -std=c11 -I./include
 
-test: test.o nonstd.a
+csrc := $(wildcard src/c/*.c)
+asmsrc := $(wildcard src/asm/*.asm)
+objects :=  $(asmsrc:.asm=.o)
+objects += $(csrc:.c=.o)
+
+test: test.c nonstd.a
 	$(CC) $(CFLAGS) -o $@ $^
 
-nonstd.a: src/c/sys.o src/asm/sys.o
+nonstd.a: $(objects)
 	ar -rc $@ $^
 
-src/asm/sys.o: src/asm/sys.asm
-	fasm $^ $@
+%.o: %.asm
+	fasm $< $@
 
 .PHONY: clean
-
 clean:
-	rm -f src/asm/*.o src/c/*.o *.o *.a
+	rm -f nonstd.a $(objects) test
 
