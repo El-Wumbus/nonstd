@@ -1,7 +1,9 @@
 #ifndef NONSTD_H
 #define NONSTD_H
 
-#include "type.h"
-#include "sys/sys.h"
+#include "types.h"
+#include "sys.h"
+#include "string.h"
+#include "io.h"
 
 #endif 

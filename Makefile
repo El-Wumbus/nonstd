@@ -1,5 +1,5 @@
 CC := gcc
-CFLAGS := -O2 -nostdlib -ffreestanding -no-pie -Wall -Wextra -Werror -std=c11 -I./include
+CFLAGS := -O2 -nostdlib -ffreestanding -no-pie -fno-stack-protector -Wall -Wextra -Werror -pedantic -std=c11 -I./include -Wno-strict-aliasing 
 
 csrc := $(wildcard src/c/*.c)
 asmsrc := $(wildcard src/asm/*.asm)
