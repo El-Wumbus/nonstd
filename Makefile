@@ -1,8 +1,8 @@
 CC := gcc
-CFLAGS := -O2 -nostdlib -ffreestanding -no-pie -fno-stack-protector -Wall -Wextra -Werror -pedantic -std=c11 -I./include -Wno-strict-aliasing 
+CFLAGS := -O2 -nostdlib -nostdinc -ffreestanding -no-pie -fno-stack-protector -Wall -Wextra -Werror -std=c11 -I./include -Wno-strict-aliasing -flto
 
-csrc := $(wildcard src/c/*.c)
-asmsrc := $(wildcard src/asm/*.asm)
+csrc := $(shell find src/c -type f -name '*.c')
+asmsrc := $(shell find src/asm -type f -name '*.asm')
 objects :=  $(asmsrc:.asm=.o)
 objects += $(csrc:.c=.o)
 

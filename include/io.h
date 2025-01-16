@@ -2,7 +2,7 @@
 #define IO_H
 
 #include <types.h>
-#include <sys.h>
+#include <sys/sys.h>
 
 #define STDIN_FILENO 0
 #define STDOUT_FILENO 1
